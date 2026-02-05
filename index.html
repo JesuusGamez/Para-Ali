@@ -2,18 +2,22 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0010">
 <title>Para Ali 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:radial-gradient(circle at bottom,#1a001a,#000);
   color:#fff;
   overflow:hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ESTRELLAS */
@@ -27,72 +31,116 @@ body{
 
 /* CARD */
 .card{
-  position:relative;z-index:2;
-  background:rgba(15,15,15,.92);
+  position:relative;
+  z-index:2;
+  background:rgba(15,15,15,.95);
   border-radius:22px;
-  padding:22px;
+  padding:20px;
+  width:92%;
   max-width:420px;
-  margin:6vh auto;
+  margin:5vh auto;
   box-shadow:0 25px 50px rgba(0,0,0,.7);
-  animation:fade .6s ease;
 }
-@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1}}
 
 .card.heartbeat{
   animation:heartbeat 1s infinite;
 }
-
 @keyframes heartbeat{
   0%{transform:scale(1)}
-  15%{transform:scale(1.02)}
-  30%{transform:scale(1)}
-  45%{transform:scale(1.025)}
-  60%{transform:scale(1)}
+  20%{transform:scale(1.03)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.04)}
+  80%{transform:scale(1)}
   100%{transform:scale(1)}
 }
 
 img{
-  width:100%;max-height:220px;
-  object-fit:cover;border-radius:16px;margin-bottom:15px;
+  width:100%;
+  max-height:200px;
+  object-fit:cover;
+  border-radius:16px;
+  margin-bottom:14px;
 }
 
-h1{color:#ff4d8d}
-p{line-height:1.65}
+h1{
+  color:#ff4d8d;
+  font-size:22px;
+  margin:5px 0 10px;
+}
+
+p{
+  line-height:1.75;
+  font-size:15px;
+}
 
 button{
-  width:100%;padding:12px;border-radius:14px;
-  border:none;font-size:16px;
-  background:#ff4d8d;color:#fff;
-  font-weight:bold;margin-top:8px;
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  font-size:17px;
+  background:#ff4d8d;
+  color:#fff;
+  font-weight:bold;
+  margin-top:12px;
 }
 
 /* PROGRESO */
-.progress{height:6px;background:#333;border-radius:10px;margin-bottom:15px}
-.progress-bar{height:100%;background:#ff4d8d;width:0%;transition:.4s}
+.progress{
+  height:6px;
+  background:#333;
+  border-radius:10px;
+  margin-bottom:14px;
+}
+.progress-bar{
+  height:100%;
+  background:#ff4d8d;
+  width:0%;
+  transition:.4s;
+}
 
-/* FLORES + CORAZONES */
+/* FLORES */
 .fall{
-  position:fixed;bottom:-40px;
-  font-size:32px;
-  animation:float 9s linear forwards;
-  pointer-events:none;z-index:1;
+  position:fixed;
+  bottom:-60px;
+  font-size:36px;
+  animation:float 14s linear forwards;
+  pointer-events:none;
+  z-index:1;
 }
 @keyframes float{
   from{transform:translateY(0) scale(1);opacity:1}
-  to{transform:translateY(-140vh) scale(1.7);opacity:0}
+  to{transform:translateY(-180vh) scale(1.9);opacity:0}
 }
 
 /* FINAL */
 .final-love{
   font-family:'Pacifico',cursive;
-  font-size:60px;
+  font-size:52px;
   color:#ff7fb0;
   text-align:center;
   animation:pulse 2s infinite;
+  user-select:none;
 }
 @keyframes pulse{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
+  50%{transform:scale(1.1)}
+}
+
+/* MENSAJE SECRETO */
+.secret{
+  margin-top:18px;
+  padding:16px;
+  border-radius:16px;
+  background:rgba(255,77,141,.1);
+  font-size:14px;
+  line-height:1.6;
+  display:none;
+  animation:fade .6s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1}
 }
 
 /* GALERIA */
@@ -100,13 +148,14 @@ button{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
-  margin-top:20px;
+  margin-top:18px;
 }
 .gallery img{
   height:120px;
+  border-radius:14px;
   opacity:0;
   transform:scale(.9);
-  transition:all .8s ease;
+  transition:.8s;
 }
 .gallery img.show{
   opacity:1;
@@ -132,129 +181,154 @@ button{
 </div>
 
 <script>
-// ESTRELLAS
-for(let i=0;i<140;i++){
-  const s=document.createElement("div");
-  s.className="star";
-  s.style.top=Math.random()*100+"%";
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDelay=Math.random()*4+"s";
-  document.getElementById("stars").appendChild(s);
+// 🌌 ESTRELLAS
+for(let i=0;i<160;i++){
+ const s=document.createElement("div");
+ s.className="star";
+ s.style.top=Math.random()*100+"%";
+ s.style.left=Math.random()*100+"%";
+ s.style.animationDelay=Math.random()*4+"s";
+ document.getElementById("stars").appendChild(s);
 }
 
-let step=0, musicStarted=false;
+// 📱 PANTALLA COMPLETA
+function goFullscreen(){
+ const el=document.documentElement;
+ if(el.requestFullscreen) el.requestFullscreen();
+ else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+}
+
+// 📳 VIBRACIÓN SUAVE
+function vibrateYes(){
+ if(navigator.vibrate){
+  navigator.vibrate([80,120,80]);
+ }
+}
+
+let step=0,musicStarted=false,heartbeatSpeed=1000,fs=false;
 const music=document.getElementById("music");
 const card=document.getElementById("card");
 
 const scenes=[
 {
  title:"Ali 💖",
- text:"Quería regalarte algo hecho con calma, pensando en ti. Algo que no se lea deprisa, sino que se sienta.",
+ text:"Quería regalarte algo distinto. Algo que no fuera solo un mensaje rápido, sino un pequeño espacio donde pudieras sentir todo lo que a veces no sé cómo decirte.",
  img:"https://via.placeholder.com/400x220?text=Ali",
  buttons:[{text:"Continuar 💌",next:1}]
 },
 {
  title:"Pensarte ✨",
- text:"A veces pienso en ti sin darme cuenta. En tu voz, en tu risa y en cómo haces que todo se sienta más bonito.",
+ text:"Apareces en mis pensamientos más veces de las que imaginas. En canciones, en silencios, en momentos simples que de pronto se sienten especiales solo porque te pienso.",
  img:"https://via.placeholder.com/400x220?text=Recuerdos",
  buttons:[{text:"Seguir leyendo 🤍",next:2}]
 },
 {
  title:"Lo nuestro 💭",
- text:"No ha sido perfecto, pero ha sido real. Y eso es lo que más quiero cuidar: lo que construimos juntos.",
+ text:"No ha sido perfecto, pero ha sido real. Y eso lo hace valioso. Me importa cuidar lo que somos, incluso cuando aprender a querernos requiere paciencia.",
  img:"https://via.placeholder.com/400x220?text=Nosotros",
- buttons:[{text:"Me gusta leer esto 💞",next:3}]
+ buttons:[{text:"Continúa 💞",next:3}]
 },
 {
  title:"Un deseo 💫",
- text:"Me gustaría seguir compartiendo la vida contigo. Momentos simples, abrazos largos y amor sincero.",
+ text:"Mi deseo es simple: seguir compartiendo la vida contigo. Risas, abrazos largos, momentos tranquilos y ese amor sincero que se siente como hogar.",
  img:"https://via.placeholder.com/400x220?text=Abrazo",
- buttons:[{text:"A mí también me gustaría 💖",next:4}]
+ buttons:[{text:"Sigue 💖",next:4}]
 },
 {
  title:"Ali… ❤️",
- text:"Con todo lo que siento, quería preguntarte algo desde el corazón… ¿Te gustaría compartir este San Valentín conmigo?",
+ text:"Ahora mi corazón late un poco más rápido. Porque con todo lo que siento, quiero preguntarte algo importante… ¿Te gustaría compartir este San Valentín conmigo?",
  img:"https://via.placeholder.com/400x220?text=San+Valentin",
- buttons:[{text:"Sí, quiero 💘",next:5}]
+ buttons:[{text:"Sí, quiero 💘",next:5, vibrate:true}]
 },
 {final:true}
 ];
 
+// 🎶 MÚSICA + LATIDOS
 function startMusic(){
  if(!musicStarted){
-   music.volume=0.15;
-   music.playbackRate=0.75;
-   music.play();
-   musicStarted=true;
-   slowRise();
-   startHeartbeat();
+  music.volume=.15;
+  music.playbackRate=.75;
+  music.play();
+  musicStarted=true;
+  slowRise();
+  heartbeat();
  }
 }
 
 function slowRise(){
- let v=music.volume;
- let r=music.playbackRate;
- const rise=setInterval(()=>{
-   if(v>=0.5 && r>=1) clearInterval(rise);
-   else{
-     if(v<0.5) v+=0.02;
-     if(r<1) r+=0.02;
-     music.volume=v;
-     music.playbackRate=r;
-   }
+ let v=music.volume,r=music.playbackRate;
+ const i=setInterval(()=>{
+  if(v>=.6&&r>=1)clearInterval(i);
+  if(v<.6)v+=.02;
+  if(r<1)r+=.02;
+  music.volume=v;
+  music.playbackRate=r;
  },300);
 }
 
-function startHeartbeat(){
+function heartbeat(){
  setInterval(()=>{
-   const bpm = 60 * music.playbackRate;
-   const interval = 60000 / bpm;
-   card.classList.remove("heartbeat");
-   void card.offsetWidth;
-   card.classList.add("heartbeat");
- },1000);
+  card.classList.remove("heartbeat");
+  void card.offsetWidth;
+  card.classList.add("heartbeat");
+ },heartbeatSpeed);
 }
 
+// 🌷 LLUVIA FINAL
 function rain(){
- const items=["💖","🌷"];
- for(let i=0;i<180;i++){
-  const f=document.createElement("div");
-  f.className="fall";
-  f.innerText=items[Math.floor(Math.random()*items.length)];
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(7+Math.random()*4)+"s";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),12000);
- }
-}
-
-function revealGallery(){
- const imgs=document.querySelectorAll(".gallery img");
- imgs.forEach((img,i)=>{
-   setTimeout(()=>img.classList.add("show"), i*800);
+ ["💖","🌷"].forEach(sym=>{
+  for(let i=0;i<120;i++){
+   const f=document.createElement("div");
+   f.className="fall";
+   f.innerText=sym;
+   f.style.left=Math.random()*100+"vw";
+   f.style.animationDuration=(12+Math.random()*6)+"s";
+   document.body.appendChild(f);
+   setTimeout(()=>f.remove(),18000);
+  }
  });
 }
 
+// 🖼 GALERIA
+function revealGallery(){
+ document.querySelectorAll(".gallery img").forEach((img,i)=>{
+  setTimeout(()=>img.classList.add("show"),i*900);
+ });
+}
+
+// 🎬 RENDER
 function render(){
  const s=scenes[step];
  const b=document.getElementById("buttons");
  b.innerHTML="";
 
  if(s.final){
-   rain();
-   music.volume=1;
-   document.getElementById("image").style.display="none";
-   document.getElementById("title").innerText="";
-   document.getElementById("text").innerHTML=
-   `<div class="final-love">Te amo, Ali 💖</div>
-    <div class="gallery">
-      <img src="imagenes/recuerdo1.jpg">
-      <img src="https://via.placeholder.com/200?text=Foto+2">
-      <img src="https://via.placeholder.com/200?text=Foto+3">
-      <img src="https://via.placeholder.com/200?text=Foto+4">
-    </div>`;
-   setTimeout(revealGallery,1200);
-   return;
+  heartbeatSpeed=600;
+  rain();
+  music.volume=1;
+  document.getElementById("image").style.display="none";
+  document.getElementById("title").innerText="";
+  document.getElementById("text").innerHTML=
+  `<div class="final-love" id="love">Te amo, Ali 💖</div>
+   <div class="secret" id="secret">
+    Este mensaje es solo para ti. Gracias por existir en mi vida, por tu paciencia, tu cariño y por hacerme sentir en casa. Siempre voy a elegirte.
+   </div>
+   <div class="gallery">
+    <img src="imagenes/recuerdo1.jpg">
+    <img src="imagenes/recuerdo2.jpg">
+    <img src="imagenes/recuerdo3.jpg">
+    <img src="imagenes/recuerdo4.jpg">
+   </div>`;
+  setTimeout(revealGallery,1200);
+
+  const love=document.getElementById("love");
+  const secret=document.getElementById("secret");
+  let timer;
+  love.addEventListener("touchstart",()=>{
+   timer=setTimeout(()=>secret.style.display="block",800);
+  });
+  love.addEventListener("touchend",()=>clearTimeout(timer));
+  return;
  }
 
  document.getElementById("image").style.display="block";
@@ -266,11 +340,12 @@ function render(){
   const el=document.createElement("button");
   el.innerText=btn.text;
   el.onclick=()=>{
-    startMusic();
-    step=btn.next;
-    document.getElementById("progress").style.width=
-      (step/(scenes.length-1))*100+"%";
-    render();
+   if(!fs){ goFullscreen(); fs=true; }
+   if(btn.vibrate) vibrateYes();
+   startMusic();
+   step=btn.next;
+   document.getElementById("progress").style.width=(step/(scenes.length-1))*100+"%";
+   render();
   };
   b.appendChild(el);
  });
@@ -280,6 +355,8 @@ render();
 </script>
 </body>
 </html>
+
+
 
 
 
