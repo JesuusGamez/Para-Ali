@@ -38,6 +38,19 @@ body{
 }
 @keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1}}
 
+.card.heartbeat{
+  animation:heartbeat 1s infinite;
+}
+
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  15%{transform:scale(1.02)}
+  30%{transform:scale(1)}
+  45%{transform:scale(1.025)}
+  60%{transform:scale(1)}
+  100%{transform:scale(1)}
+}
+
 img{
   width:100%;max-height:220px;
   object-fit:cover;border-radius:16px;margin-bottom:15px;
@@ -59,14 +72,14 @@ button{
 
 /* FLORES + CORAZONES */
 .fall{
-  position:fixed;bottom:-20px;
-  font-size:30px;
-  animation:float 5s linear forwards;
+  position:fixed;bottom:-40px;
+  font-size:32px;
+  animation:float 9s linear forwards;
   pointer-events:none;z-index:1;
 }
 @keyframes float{
   from{transform:translateY(0) scale(1);opacity:1}
-  to{transform:translateY(-120vh) scale(1.6);opacity:0}
+  to{transform:translateY(-140vh) scale(1.7);opacity:0}
 }
 
 /* FINAL */
@@ -110,7 +123,7 @@ button{
   <source src="IRIS.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card">
+<div class="card" id="card">
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
   <img id="image">
   <h1 id="title"></h1>
@@ -131,17 +144,18 @@ for(let i=0;i<140;i++){
 
 let step=0, musicStarted=false;
 const music=document.getElementById("music");
+const card=document.getElementById("card");
 
 const scenes=[
 {
  title:"Ali 💖",
- text:"Quería regalarte algo hecho con calma, pensando en ti. Algo que no se lea rápido, sino que se sienta.",
+ text:"Quería regalarte algo hecho con calma, pensando en ti. Algo que no se lea deprisa, sino que se sienta.",
  img:"https://via.placeholder.com/400x220?text=Ali",
  buttons:[{text:"Continuar 💌",next:1}]
 },
 {
  title:"Pensarte ✨",
- text:"A veces pienso en ti sin darme cuenta. En tu voz, tu risa, y en cómo haces que todo se sienta más bonito.",
+ text:"A veces pienso en ti sin darme cuenta. En tu voz, en tu risa y en cómo haces que todo se sienta más bonito.",
  img:"https://via.placeholder.com/400x220?text=Recuerdos",
  buttons:[{text:"Seguir leyendo 🤍",next:2}]
 },
@@ -159,7 +173,7 @@ const scenes=[
 },
 {
  title:"Ali… ❤️",
- text:"Con todo lo que siento, quería preguntarte algo desde el corazón… ¿te gustaría compartir este San Valentín conmigo?",
+ text:"Con todo lo que siento, quería preguntarte algo desde el corazón… ¿Te gustaría compartir este San Valentín conmigo?",
  img:"https://via.placeholder.com/400x220?text=San+Valentin",
  buttons:[{text:"Sí, quiero 💘",next:5}]
 },
@@ -168,30 +182,49 @@ const scenes=[
 
 function startMusic(){
  if(!musicStarted){
-   music.volume=0.4;
+   music.volume=0.15;
+   music.playbackRate=0.75;
    music.play();
    musicStarted=true;
+   slowRise();
+   startHeartbeat();
  }
 }
 
-function raiseVolume(){
+function slowRise(){
  let v=music.volume;
- const up=setInterval(()=>{
-   if(v>=1) clearInterval(up);
-   else {v+=0.05; music.volume=v;}
- },200);
+ let r=music.playbackRate;
+ const rise=setInterval(()=>{
+   if(v>=0.5 && r>=1) clearInterval(rise);
+   else{
+     if(v<0.5) v+=0.02;
+     if(r<1) r+=0.02;
+     music.volume=v;
+     music.playbackRate=r;
+   }
+ },300);
+}
+
+function startHeartbeat(){
+ setInterval(()=>{
+   const bpm = 60 * music.playbackRate;
+   const interval = 60000 / bpm;
+   card.classList.remove("heartbeat");
+   void card.offsetWidth;
+   card.classList.add("heartbeat");
+ },1000);
 }
 
 function rain(){
  const items=["💖","🌷"];
- for(let i=0;i<160;i++){
+ for(let i=0;i<180;i++){
   const f=document.createElement("div");
   f.className="fall";
   f.innerText=items[Math.floor(Math.random()*items.length)];
   f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(3+Math.random()*3)+"s";
+  f.style.animationDuration=(7+Math.random()*4)+"s";
   document.body.appendChild(f);
-  setTimeout(()=>f.remove(),6000);
+  setTimeout(()=>f.remove(),12000);
  }
 }
 
@@ -209,7 +242,7 @@ function render(){
 
  if(s.final){
    rain();
-   raiseVolume();
+   music.volume=1;
    document.getElementById("image").style.display="none";
    document.getElementById("title").innerText="";
    document.getElementById("text").innerHTML=
@@ -247,6 +280,8 @@ render();
 </script>
 </body>
 </html>
+
+
 
 
 
