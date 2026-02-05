@@ -14,7 +14,6 @@
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:radial-gradient(circle at bottom,#1a001a,#000);
   color:#fff;
   overflow:hidden;
   -webkit-tap-highlight-color:transparent;
@@ -22,7 +21,22 @@ body{
   align-items:center;
   justify-content:center;
   min-height:100vh;
+  background:radial-gradient(circle at bottom,#1a001a,#000);
+  transition:background 1.2s ease;
 }
+
+/* FONDOS POR ESCENA */
+body.stage-0{background:radial-gradient(circle at bottom,#1a001a,#000)}
+body.stage-1{background:radial-gradient(circle at bottom,#220022,#05000a)}
+body.stage-2{background:radial-gradient(circle at bottom,#24001a,#08000f)}
+body.stage-3{background:radial-gradient(circle at bottom,#20001f,#0b0015)}
+body.stage-4{background:radial-gradient(circle at bottom,#18001f,#0a0018)}
+body.stage-5{background:radial-gradient(circle at bottom,#12001f,#080018)}
+body.stage-6{background:radial-gradient(circle at bottom,#140022,#0a001a)}
+body.stage-7{background:radial-gradient(circle at bottom,#1a0024,#0a001c)}
+body.stage-8{background:radial-gradient(circle at bottom,#220028,#0b001f)}
+body.stage-9{background:radial-gradient(circle at bottom,#2a0030,#0d0022)}
+body.stage-final{background:radial-gradient(circle at bottom,#3a003f,#120028)}
 
 /* ESTRELLAS */
 .stars{position:fixed;width:100%;height:100%;z-index:0;}
@@ -38,10 +52,10 @@ body{
   position:relative;
   z-index:2;
   background:rgba(15,15,15,.95);
-  border-radius:24px;
-  padding:22px;
+  border-radius:26px;
+  padding:24px;
   width:92%;
-  max-width:430px;
+  max-width:440px;
   box-shadow:0 25px 50px rgba(0,0,0,.7);
 }
 
@@ -52,7 +66,7 @@ body{
   0%{transform:scale(1)}
   20%{transform:scale(1.03)}
   40%{transform:scale(1)}
-  60%{transform:scale(1.045)}
+  60%{transform:scale(1.05)}
   80%{transform:scale(1)}
   100%{transform:scale(1)}
 }
@@ -73,22 +87,22 @@ h1{
 }
 
 p{
-  line-height:1.85;
-  font-size:15.5px;
+  line-height:1.9;
+  font-size:15.8px;
   text-align:center;
 }
 
 /* BOTONES */
 button{
   width:100%;
-  padding:15px;
-  border-radius:18px;
+  padding:16px;
+  border-radius:20px;
   border:none;
   font-size:17px;
   background:#ff4d8d;
   color:#fff;
   font-weight:bold;
-  margin-top:14px;
+  margin-top:16px;
 }
 
 /* PROGRESO */
@@ -105,41 +119,41 @@ button{
   transition:.4s;
 }
 
-/* FLORES */
+/* FLORES + CORAZONES (MÁS TIEMPO) */
 .fall{
   position:fixed;
-  bottom:-70px;
-  font-size:38px;
-  animation:float 16s linear forwards;
+  bottom:-80px;
+  font-size:40px;
+  animation:float 22s linear forwards;
   pointer-events:none;
   z-index:1;
 }
 @keyframes float{
   from{transform:translateY(0) scale(1);opacity:1}
-  to{transform:translateY(-200vh) scale(2);opacity:0}
+  to{transform:translateY(-230vh) scale(2.1);opacity:0}
 }
 
 /* FINAL */
 .final-love{
   font-family:'Pacifico',cursive;
-  font-size:54px;
+  font-size:56px;
   color:#ff7fb0;
   text-align:center;
   animation:pulse 2s infinite;
 }
 @keyframes pulse{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.12)}
+  50%{transform:scale(1.14)}
 }
 
 /* MENSAJE SECRETO */
 .secret{
-  margin-top:20px;
+  margin-top:22px;
   padding:18px;
   border-radius:18px;
   background:rgba(255,77,141,.12);
-  font-size:14.5px;
-  line-height:1.7;
+  font-size:14.8px;
+  line-height:1.75;
   display:none;
   animation:fade .6s ease;
   text-align:center;
@@ -170,7 +184,7 @@ button{
 </style>
 </head>
 
-<body>
+<body class="stage-0">
 
 <div class="stars" id="stars"></div>
 
@@ -188,7 +202,7 @@ button{
 
 <script>
 // ESTRELLAS
-for(let i=0;i<170;i++){
+for(let i=0;i<180;i++){
  const s=document.createElement("div");
  s.className="star";
  s.style.top=Math.random()*100+"%";
@@ -204,27 +218,40 @@ function goFullscreen(){
  else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
 }
 
-// VIBRACIÓN
+// VIBRACIÓN RÍTMICA (LATIDOS)
+let vibrateTimer=null;
+function startHeartbeatVibration(){
+ if(!navigator.vibrate) return;
+ stopHeartbeatVibration();
+ vibrateTimer=setInterval(()=>{
+   navigator.vibrate([40,60,40]); // latido doble suave
+ }, heartbeatSpeed);
+}
+function stopHeartbeatVibration(){
+ if(vibrateTimer){ clearInterval(vibrateTimer); vibrateTimer=null; }
+}
+
+// VIBRACIÓN ESPECIAL “SÍ”
 function vibrateYes(){
  if(navigator.vibrate){
   navigator.vibrate([80,120,80]);
  }
 }
 
-let step=0,musicStarted=false,heartbeatSpeed=1000,fs=false;
+let step=0,musicStarted=false,heartbeatSpeed=1100,fs=false;
 const music=document.getElementById("music");
 const card=document.getElementById("card");
 
 const scenes=[
 {
  title:"Ali 💖",
- text:"Quería regalarte algo distinto. Algo que no fuera solo un mensaje rápido, sino un espacio creado con calma, donde cada palabra tuviera intención. Algo que pudieras leer despacio, sentir sin prisa y guardar como un pequeño recuerdo nuestro.",
+ text:"Quería regalarte algo distinto. No un mensaje rápido, sino un espacio creado con calma. Un lugar donde cada palabra tenga intención y puedas leer sin prisa, como se sienten las cosas que importan.",
  img:"https://via.placeholder.com/400x220?text=Ali",
  buttons:[{text:"Continuar 💌",next:1}]
 },
 {
  title:"Pensarte ✨",
- text:"Apareces en mis pensamientos más veces de las que imaginas. En canciones que no buscaba, en silencios largos, en momentos simples del día que de pronto se vuelven especiales solo porque tu nombre cruza mi mente.",
+ text:"Apareces en mis pensamientos más veces de las que imaginas. En canciones, en silencios largos, en momentos simples que de pronto se vuelven especiales solo porque tu nombre pasa por mi mente.",
  img:"https://via.placeholder.com/400x220?text=Recuerdos",
  buttons:[{text:"Seguir leyendo 🤍",next:2}]
 },
@@ -236,38 +263,50 @@ const scenes=[
 },
 {
  title:"Lo difícil 🤍",
- text:"También hemos tenido momentos difíciles. Silencios, dudas, aprendizajes. Pero incluso ahí, elegí quedarme. Porque lo nuestro vale el esfuerzo, la paciencia y las ganas de seguir construyendo.",
+ text:"También hubo momentos difíciles. Silencios, dudas, aprendizajes. Y aun así, elegí quedarme. Porque lo nuestro vale el esfuerzo, la paciencia y las ganas reales de seguir construyendo.",
  img:"https://via.placeholder.com/400x220?text=Aprender",
  buttons:[{text:"Sigo aquí 💞",next:4}]
 },
 {
  title:"Lo que siento 💫",
- text:"Lo que siento por ti no es solo emoción. Es calma, cuidado y deseo de verte bien. Es querer acompañarte, respetarte y crecer contigo, sin promesas vacías, solo con hechos.",
+ text:"Lo que siento por ti no es solo emoción. Es cuidado, respeto y deseo de verte bien. Es elegirte con calma, sin prisa, con la certeza de que quiero caminar contigo.",
  img:"https://via.placeholder.com/400x220?text=Sentir",
  buttons:[{text:"Continúa 💖",next:5}]
 },
 {
  title:"Mi promesa 🌷",
- text:"No prometo perfección, pero sí sinceridad. No prometo ausencia de problemas, pero sí ganas de resolverlos juntos. Prometo elegirte cada día mientras tú quieras caminar a mi lado.",
+ text:"No prometo perfección, pero sí sinceridad. No prometo que todo sea fácil, pero sí ganas de resolverlo juntos. Prometo cuidarte mientras tú quieras quedarte.",
  img:"https://via.placeholder.com/400x220?text=Promesa",
  buttons:[{text:"Sigue 💗",next:6}]
 },
 {
+ title:"Pequeños sueños 🌌",
+ text:"Sueño con momentos simples a tu lado. Con planes espontáneos, con tardes tranquilas, con sentir que el futuro se construye en los detalles que compartimos hoy.",
+ img:"https://via.placeholder.com/400x220?text=Suenos",
+ buttons:[{text:"Un paso más ✨",next:7}]
+},
+{
+ title:"Lo que elijo 💞",
+ text:"Si pudiera resumirlo todo en una palabra, sería elegir. Elegirte hoy, elegirte mañana, elegir crecer contigo sin perder lo que somos.",
+ img:"https://via.placeholder.com/400x220?text=Elegir",
+ buttons:[{text:"Continúa 💘",next:8}]
+},
+{
  title:"Un deseo ❤️",
- text:"Mi deseo es sencillo y profundo al mismo tiempo: seguir compartiendo la vida contigo. Los días buenos, los no tan buenos, los abrazos largos y ese amor que se siente como hogar.",
+ text:"Mi deseo es sencillo y profundo: seguir compartiendo la vida contigo. Los días buenos, los no tan buenos, los abrazos largos y ese amor que se siente como hogar.",
  img:"https://via.placeholder.com/400x220?text=Deseo",
- buttons:[{text:"Un paso más 💘",next:7}]
+ buttons:[{text:"Un paso más 💓",next:9}]
 },
 {
  title:"Ali… 💓",
- text:"Ahora mismo, mientras lees esto, mi corazón late un poco más rápido. Porque quiero preguntarte algo importante, algo que nace desde lo más honesto de mí… ¿Te gustaría compartir este San Valentín conmigo?",
+ text:"Ahora mismo mi corazón late un poco más rápido. Porque quiero preguntarte algo importante, algo que nace desde lo más honesto de mí… ¿Te gustaría compartir este San Valentín conmigo?",
  img:"https://via.placeholder.com/400x220?text=San+Valentin",
- buttons:[{text:"Sí, quiero 💘",next:8,vibrate:true}]
+ buttons:[{text:"Sí, quiero 💘",next:10,vibrate:true}]
 },
 {final:true}
 ];
 
-// MÚSICA
+// MÚSICA + LATIDOS
 function startMusic(){
  if(!musicStarted){
   music.volume=.15;
@@ -282,8 +321,8 @@ function startMusic(){
 function slowRise(){
  let v=music.volume,r=music.playbackRate;
  const i=setInterval(()=>{
-  if(v>=.6&&r>=1)clearInterval(i);
-  if(v<.6)v+=.02;
+  if(v>=.65&&r>=1)clearInterval(i);
+  if(v<.65)v+=.02;
   if(r<1)r+=.02;
   music.volume=v;
   music.playbackRate=r;
@@ -296,19 +335,20 @@ function heartbeat(){
   void card.offsetWidth;
   card.classList.add("heartbeat");
  },heartbeatSpeed);
+ startHeartbeatVibration();
 }
 
-// LLUVIA
+// LLUVIA FINAL (MÁS TIEMPO)
 function rain(){
  ["💖","🌷"].forEach(sym=>{
-  for(let i=0;i<130;i++){
+  for(let i=0;i<160;i++){
    const f=document.createElement("div");
    f.className="fall";
    f.innerText=sym;
    f.style.left=Math.random()*100+"vw";
-   f.style.animationDuration=(14+Math.random()*6)+"s";
+   f.style.animationDuration=(20+Math.random()*8)+"s";
    document.body.appendChild(f);
-   setTimeout(()=>f.remove(),20000);
+   setTimeout(()=>f.remove(),28000);
   }
  });
 }
@@ -322,12 +362,15 @@ function revealGallery(){
 
 // RENDER
 function render(){
+ document.body.className = sClass(step);
  const s=scenes[step];
  const b=document.getElementById("buttons");
  b.innerHTML="";
 
  if(s.final){
-  heartbeatSpeed=600;
+  document.body.className="stage-final";
+  heartbeatSpeed=650;
+  startHeartbeatVibration();
   rain();
   music.volume=1;
   document.getElementById("image").style.display="none";
@@ -335,7 +378,7 @@ function render(){
   document.getElementById("text").innerHTML=
   `<div class="final-love" id="love">Te amo, Ali 💖</div>
    <div class="secret" id="secret">
-    Este mensaje es solo para ti. Gracias por tu forma de ser, por tu cariño y por todo lo que compartimos. Gracias por elegirme. Siempre voy a elegirte.
+    Este mensaje es solo para ti. Gracias por tu forma de ser, por tu cariño y por elegirnos. Siempre voy a elegirte.
    </div>
    <div class="gallery">
     <img src="imagenes/recuerdo1.jpg">
@@ -363,7 +406,7 @@ function render(){
   el.innerText=btn.text;
   el.onclick=()=>{
    if(!fs){goFullscreen();fs=true;}
-   if(btn.vibrate) vibrateYes();
+   if(btn.vibrate){ vibrateYes(); heartbeatSpeed=750; }
    startMusic();
    step=btn.next;
    document.getElementById("progress").style.width=(step/(scenes.length-1))*100+"%";
@@ -373,11 +416,12 @@ function render(){
  });
 }
 
+function sClass(i){ return "stage-"+Math.min(i,9); }
+
 render();
 </script>
 </body>
 </html>
-
 
 
 
