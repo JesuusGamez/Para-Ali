@@ -388,6 +388,9 @@ function render(){
     <img src="imagenes/recuerdo2.jpg">
     <img src="imagenes/recuerdo3.jpg">
     <img src="imagenes/recuerdo4.jpg">
+   </div>
+   <div class="final-message" style="text-align:center; margin-top:18px; font-size:18px; line-height:1.5; color:#ffb6c1;">
+     Gracias por existir en mi vida. Siempre voy a elegirte.
    </div>`;
   setTimeout(revealGallery,1200);
 
@@ -397,7 +400,8 @@ function render(){
   love.addEventListener("touchstart",()=>{timer=setTimeout(()=>secret.style.display="block",800)});
   love.addEventListener("touchend",()=>clearTimeout(timer));
   return;
- }
+}
+
 
  document.getElementById("image").style.display="block";
  document.getElementById("image").src=s.img;
@@ -425,4 +429,5 @@ render();
 </script>
 </body>
 </html>
+
 
