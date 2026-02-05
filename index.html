@@ -17,7 +17,11 @@ body{
   background:radial-gradient(circle at bottom,#1a001a,#000);
   color:#fff;
   overflow:hidden;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
 }
 
 /* ESTRELLAS */
@@ -34,11 +38,10 @@ body{
   position:relative;
   z-index:2;
   background:rgba(15,15,15,.95);
-  border-radius:22px;
-  padding:20px;
+  border-radius:24px;
+  padding:22px;
   width:92%;
-  max-width:420px;
-  margin:5vh auto;
+  max-width:430px;
   box-shadow:0 25px 50px rgba(0,0,0,.7);
 }
 
@@ -49,7 +52,7 @@ body{
   0%{transform:scale(1)}
   20%{transform:scale(1.03)}
   40%{transform:scale(1)}
-  60%{transform:scale(1.04)}
+  60%{transform:scale(1.045)}
   80%{transform:scale(1)}
   100%{transform:scale(1)}
 }
@@ -58,31 +61,34 @@ img{
   width:100%;
   max-height:200px;
   object-fit:cover;
-  border-radius:16px;
-  margin-bottom:14px;
+  border-radius:18px;
+  margin-bottom:16px;
 }
 
 h1{
   color:#ff4d8d;
-  font-size:22px;
-  margin:5px 0 10px;
+  font-size:23px;
+  margin:6px 0 12px;
+  text-align:center;
 }
 
 p{
-  line-height:1.75;
-  font-size:15px;
+  line-height:1.85;
+  font-size:15.5px;
+  text-align:center;
 }
 
+/* BOTONES */
 button{
   width:100%;
-  padding:14px;
-  border-radius:16px;
+  padding:15px;
+  border-radius:18px;
   border:none;
   font-size:17px;
   background:#ff4d8d;
   color:#fff;
   font-weight:bold;
-  margin-top:12px;
+  margin-top:14px;
 }
 
 /* PROGRESO */
@@ -102,44 +108,44 @@ button{
 /* FLORES */
 .fall{
   position:fixed;
-  bottom:-60px;
-  font-size:36px;
-  animation:float 14s linear forwards;
+  bottom:-70px;
+  font-size:38px;
+  animation:float 16s linear forwards;
   pointer-events:none;
   z-index:1;
 }
 @keyframes float{
   from{transform:translateY(0) scale(1);opacity:1}
-  to{transform:translateY(-180vh) scale(1.9);opacity:0}
+  to{transform:translateY(-200vh) scale(2);opacity:0}
 }
 
 /* FINAL */
 .final-love{
   font-family:'Pacifico',cursive;
-  font-size:52px;
+  font-size:54px;
   color:#ff7fb0;
   text-align:center;
   animation:pulse 2s infinite;
-  user-select:none;
 }
 @keyframes pulse{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.1)}
+  50%{transform:scale(1.12)}
 }
 
 /* MENSAJE SECRETO */
 .secret{
-  margin-top:18px;
-  padding:16px;
-  border-radius:16px;
-  background:rgba(255,77,141,.1);
-  font-size:14px;
-  line-height:1.6;
+  margin-top:20px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,77,141,.12);
+  font-size:14.5px;
+  line-height:1.7;
   display:none;
   animation:fade .6s ease;
+  text-align:center;
 }
 @keyframes fade{
-  from{opacity:0;transform:translateY(10px)}
+  from{opacity:0;transform:translateY(12px)}
   to{opacity:1}
 }
 
@@ -147,15 +153,15 @@ button{
 .gallery{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-top:18px;
+  gap:12px;
+  margin-top:22px;
 }
 .gallery img{
   height:120px;
-  border-radius:14px;
+  border-radius:16px;
   opacity:0;
   transform:scale(.9);
-  transition:.8s;
+  transition:.9s;
 }
 .gallery img.show{
   opacity:1;
@@ -181,8 +187,8 @@ button{
 </div>
 
 <script>
-// 🌌 ESTRELLAS
-for(let i=0;i<160;i++){
+// ESTRELLAS
+for(let i=0;i<170;i++){
  const s=document.createElement("div");
  s.className="star";
  s.style.top=Math.random()*100+"%";
@@ -191,14 +197,14 @@ for(let i=0;i<160;i++){
  document.getElementById("stars").appendChild(s);
 }
 
-// 📱 PANTALLA COMPLETA
+// FULLSCREEN
 function goFullscreen(){
  const el=document.documentElement;
  if(el.requestFullscreen) el.requestFullscreen();
  else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
 }
 
-// 📳 VIBRACIÓN SUAVE
+// VIBRACIÓN
 function vibrateYes(){
  if(navigator.vibrate){
   navigator.vibrate([80,120,80]);
@@ -212,38 +218,56 @@ const card=document.getElementById("card");
 const scenes=[
 {
  title:"Ali 💖",
- text:"Quería regalarte algo distinto. Algo que no fuera solo un mensaje rápido, sino un pequeño espacio donde pudieras sentir todo lo que a veces no sé cómo decirte.",
+ text:"Quería regalarte algo distinto. Algo que no fuera solo un mensaje rápido, sino un espacio creado con calma, donde cada palabra tuviera intención. Algo que pudieras leer despacio, sentir sin prisa y guardar como un pequeño recuerdo nuestro.",
  img:"https://via.placeholder.com/400x220?text=Ali",
  buttons:[{text:"Continuar 💌",next:1}]
 },
 {
  title:"Pensarte ✨",
- text:"Apareces en mis pensamientos más veces de las que imaginas. En canciones, en silencios, en momentos simples que de pronto se sienten especiales solo porque te pienso.",
+ text:"Apareces en mis pensamientos más veces de las que imaginas. En canciones que no buscaba, en silencios largos, en momentos simples del día que de pronto se vuelven especiales solo porque tu nombre cruza mi mente.",
  img:"https://via.placeholder.com/400x220?text=Recuerdos",
  buttons:[{text:"Seguir leyendo 🤍",next:2}]
 },
 {
- title:"Lo nuestro 💭",
- text:"No ha sido perfecto, pero ha sido real. Y eso lo hace valioso. Me importa cuidar lo que somos, incluso cuando aprender a querernos requiere paciencia.",
- img:"https://via.placeholder.com/400x220?text=Nosotros",
- buttons:[{text:"Continúa 💞",next:3}]
+ title:"Lo cotidiano 🌙",
+ text:"Me gusta pensarnos en lo cotidiano. En lo simple. En compartir miradas, mensajes sin motivo, risas inesperadas. En sentir que incluso lo normal se vuelve bonito cuando lo vivimos juntos.",
+ img:"https://via.placeholder.com/400x220?text=Cotidiano",
+ buttons:[{text:"Continúa ✨",next:3}]
 },
 {
- title:"Un deseo 💫",
- text:"Mi deseo es simple: seguir compartiendo la vida contigo. Risas, abrazos largos, momentos tranquilos y ese amor sincero que se siente como hogar.",
- img:"https://via.placeholder.com/400x220?text=Abrazo",
- buttons:[{text:"Sigue 💖",next:4}]
+ title:"Lo difícil 🤍",
+ text:"También hemos tenido momentos difíciles. Silencios, dudas, aprendizajes. Pero incluso ahí, elegí quedarme. Porque lo nuestro vale el esfuerzo, la paciencia y las ganas de seguir construyendo.",
+ img:"https://via.placeholder.com/400x220?text=Aprender",
+ buttons:[{text:"Sigo aquí 💞",next:4}]
 },
 {
- title:"Ali… ❤️",
- text:"Ahora mi corazón late un poco más rápido. Porque con todo lo que siento, quiero preguntarte algo importante… ¿Te gustaría compartir este San Valentín conmigo?",
+ title:"Lo que siento 💫",
+ text:"Lo que siento por ti no es solo emoción. Es calma, cuidado y deseo de verte bien. Es querer acompañarte, respetarte y crecer contigo, sin promesas vacías, solo con hechos.",
+ img:"https://via.placeholder.com/400x220?text=Sentir",
+ buttons:[{text:"Continúa 💖",next:5}]
+},
+{
+ title:"Mi promesa 🌷",
+ text:"No prometo perfección, pero sí sinceridad. No prometo ausencia de problemas, pero sí ganas de resolverlos juntos. Prometo elegirte cada día mientras tú quieras caminar a mi lado.",
+ img:"https://via.placeholder.com/400x220?text=Promesa",
+ buttons:[{text:"Sigue 💗",next:6}]
+},
+{
+ title:"Un deseo ❤️",
+ text:"Mi deseo es sencillo y profundo al mismo tiempo: seguir compartiendo la vida contigo. Los días buenos, los no tan buenos, los abrazos largos y ese amor que se siente como hogar.",
+ img:"https://via.placeholder.com/400x220?text=Deseo",
+ buttons:[{text:"Un paso más 💘",next:7}]
+},
+{
+ title:"Ali… 💓",
+ text:"Ahora mismo, mientras lees esto, mi corazón late un poco más rápido. Porque quiero preguntarte algo importante, algo que nace desde lo más honesto de mí… ¿Te gustaría compartir este San Valentín conmigo?",
  img:"https://via.placeholder.com/400x220?text=San+Valentin",
- buttons:[{text:"Sí, quiero 💘",next:5, vibrate:true}]
+ buttons:[{text:"Sí, quiero 💘",next:8,vibrate:true}]
 },
 {final:true}
 ];
 
-// 🎶 MÚSICA + LATIDOS
+// MÚSICA
 function startMusic(){
  if(!musicStarted){
   music.volume=.15;
@@ -274,29 +298,29 @@ function heartbeat(){
  },heartbeatSpeed);
 }
 
-// 🌷 LLUVIA FINAL
+// LLUVIA
 function rain(){
  ["💖","🌷"].forEach(sym=>{
-  for(let i=0;i<120;i++){
+  for(let i=0;i<130;i++){
    const f=document.createElement("div");
    f.className="fall";
    f.innerText=sym;
    f.style.left=Math.random()*100+"vw";
-   f.style.animationDuration=(12+Math.random()*6)+"s";
+   f.style.animationDuration=(14+Math.random()*6)+"s";
    document.body.appendChild(f);
-   setTimeout(()=>f.remove(),18000);
+   setTimeout(()=>f.remove(),20000);
   }
  });
 }
 
-// 🖼 GALERIA
+// GALERIA
 function revealGallery(){
  document.querySelectorAll(".gallery img").forEach((img,i)=>{
   setTimeout(()=>img.classList.add("show"),i*900);
  });
 }
 
-// 🎬 RENDER
+// RENDER
 function render(){
  const s=scenes[step];
  const b=document.getElementById("buttons");
@@ -311,7 +335,7 @@ function render(){
   document.getElementById("text").innerHTML=
   `<div class="final-love" id="love">Te amo, Ali 💖</div>
    <div class="secret" id="secret">
-    Este mensaje es solo para ti. Gracias por existir en mi vida, por tu paciencia, tu cariño y por hacerme sentir en casa. Siempre voy a elegirte.
+    Este mensaje es solo para ti. Gracias por tu forma de ser, por tu cariño y por todo lo que compartimos. Gracias por elegirme. Siempre voy a elegirte.
    </div>
    <div class="gallery">
     <img src="imagenes/recuerdo1.jpg">
@@ -324,9 +348,7 @@ function render(){
   const love=document.getElementById("love");
   const secret=document.getElementById("secret");
   let timer;
-  love.addEventListener("touchstart",()=>{
-   timer=setTimeout(()=>secret.style.display="block",800);
-  });
+  love.addEventListener("touchstart",()=>{timer=setTimeout(()=>secret.style.display="block",800)});
   love.addEventListener("touchend",()=>clearTimeout(timer));
   return;
  }
@@ -340,7 +362,7 @@ function render(){
   const el=document.createElement("button");
   el.innerText=btn.text;
   el.onclick=()=>{
-   if(!fs){ goFullscreen(); fs=true; }
+   if(!fs){goFullscreen();fs=true;}
    if(btn.vibrate) vibrateYes();
    startMusic();
    step=btn.next;
@@ -355,7 +377,6 @@ render();
 </script>
 </body>
 </html>
-
 
 
 
