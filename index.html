@@ -1,251 +1,252 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Ali 💖</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Querida Ali 💖</title>
 <style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:radial-gradient(circle at bottom,#1a001a,#000);
-  color:#fff;
-  overflow:hidden;
-}
-
-/* ESTRELLAS */
-.stars{position:fixed;width:100%;height:100%;z-index:0;}
-.star{
-  position:absolute;width:2px;height:2px;
-  background:white;border-radius:50%;
-  animation:twinkle 4s infinite;
-}
-@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
-
-/* CARD */
-.card{
-  position:relative;z-index:2;
-  background:rgba(15,15,15,.92);
-  border-radius:22px;
-  padding:22px;
-  max-width:420px;
-  margin:6vh auto;
-  box-shadow:0 25px 50px rgba(0,0,0,.7);
-  animation:fade .6s ease;
-}
-@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1}}
-
-img{
-  width:100%;max-height:220px;
-  object-fit:cover;border-radius:16px;margin-bottom:15px;
-}
-
-h1{color:#ff4d8d}
-p{line-height:1.65}
-
-button{
-  width:100%;padding:12px;border-radius:14px;
-  border:none;font-size:16px;
-  background:#ff4d8d;color:#fff;
-  font-weight:bold;margin-top:8px;
-}
-
-/* PROGRESO */
-.progress{height:6px;background:#333;border-radius:10px;margin-bottom:15px}
-.progress-bar{height:100%;background:#ff4d8d;width:0%;transition:.4s}
-
-/* FLORES + CORAZONES */
-.fall{
-  position:fixed;bottom:-20px;
-  font-size:30px;
-  animation:float 5s linear forwards;
-  pointer-events:none;z-index:1;
-}
-@keyframes float{
-  from{transform:translateY(0) scale(1);opacity:1}
-  to{transform:translateY(-120vh) scale(1.6);opacity:0}
-}
-
-/* FINAL */
-.final-love{
-  font-family:'Pacifico',cursive;
-  font-size:60px;
-  color:#ff7fb0;
-  text-align:center;
-  animation:pulse 2s infinite;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-}
-
-/* GALERIA */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-top:20px;
-}
-.gallery img{
-  height:120px;
-  opacity:0;
-  transform:scale(.9);
-  transition:all .8s ease;
-}
-.gallery img.show{
-  opacity:1;
-  transform:scale(1);
-}
+  body {
+    margin:0;
+    font-family:'Arial', sans-serif;
+    background: radial-gradient(#000,#1a0c2c);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+  }
+  .card {
+    background:#111;
+    border-radius:20px;
+    padding:20px;
+    max-width:420px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+    animation:fade 0.6s ease;
+  }
+  @keyframes fade {
+    from {opacity:0; transform:translateY(10px);}
+    to {opacity:1; transform:translateY(0);}
+  }
+  h1 { color:#ff4d8d; margin-bottom:10px; }
+  p { margin-bottom:15px; line-height:1.5; }
+  img { width:180px; border-radius:16px; margin-bottom:15px; animation:fade 0.8s ease; }
+  button {
+    width:100%; margin-top:10px; padding:12px; border-radius:12px; border:none;
+    font-size:16px; background:#ff4d8d; color:#fff; cursor:pointer; font-weight:bold;
+    transition:all .3s ease;
+  }
+  button:hover { opacity:0.9; transform:scale(1.05); }
+  .hidden { display:none; }
+  .heart, .tulip {
+    position:absolute;
+    width:30px;
+    height:30px;
+    pointer-events:none;
+    animation:fall 4s linear forwards;
+  }
+  @keyframes fall {
+    0% {transform:translateY(-50px) rotate(0deg); opacity:1;}
+    100% {transform:translateY(800px) rotate(360deg); opacity:0;}
+  }
+  #finalText {
+    font-size:3em;
+    font-family:'Cursive', serif;
+    color:#ff4d8d;
+    animation:pulse 1s infinite alternate;
+  }
+  @keyframes pulse {
+    0%{transform:scale(1);}
+    100%{transform:scale(1.2);}
+  }
+  .gallery img {
+    width:100%;
+    border-radius:16px;
+    margin-top:15px;
+    opacity:0;
+    transition:opacity 1s ease;
+  }
+  body::after{
+    content:'';
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:url('https://i.imgur.com/kZt0nLz.png') repeat;
+    animation:stars 60s linear infinite;
+    top:-50%; left:-50%;
+    z-index:-1;
+  }
+  @keyframes stars{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(-50%,50%);}
+  }
 </style>
 </head>
-
 <body>
-
-<div class="stars" id="stars"></div>
+<div class="card" id="game">
+  <img id="image" src="imagenes/ali.jpg" alt="">
+  <h1 id="title">Querida Ali 💖</h1>
+  <p id="text">Tengo un pequeño juego para ti…</p>
+  <div id="buttons">
+    <button onclick="startGame()">Empezar 💌</button>
+  </div>
+</div>
 
 <audio id="music" loop>
   <source src="IRIS.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card">
-  <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <img id="image">
-  <h1 id="title"></h1>
-  <p id="text"></p>
-  <div id="buttons"></div>
-</div>
-
 <script>
-// ESTRELLAS
-for(let i=0;i<140;i++){
-  const s=document.createElement("div");
-  s.className="star";
-  s.style.top=Math.random()*100+"%";
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDelay=Math.random()*4+"s";
-  document.getElementById("stars").appendChild(s);
+let step = 0;
+
+// FUNCION CORAZONES Y TULIPANES
+function rain(){
+  for(let i=0;i<10;i++){
+    const heart = document.createElement('div');
+    heart.className='heart';
+    heart.style.left=Math.random()*100+'%';
+    heart.style.background='url(https://i.imgur.com/4d1bHgA.png) no-repeat center/contain';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+
+    const tulip = document.createElement('div');
+    tulip.className='tulip';
+    tulip.style.left=Math.random()*100+'%';
+    tulip.style.background='url(https://i.imgur.com/R9n7z0f.png) no-repeat center/contain';
+    document.body.appendChild(tulip);
+    setTimeout(()=>tulip.remove(),4000);
+  }
 }
 
-let step=0, musicStarted=false;
-const music=document.getElementById("music");
+// ESCENAS
+const scenes = [
+{
+  title: 'Querida Ali 💖',
+  text: 'Tengo un pequeño juego para ti…',
+  img: 'imagenes/ali.jpg',
+  buttons: [{text:'Continuar 💌', action: next}]
+},
+{
+  title: 'Un momento para sentir ✨',
+  text: 'Cuando pienso en nosotros, siento primero calma y alegría. Cada instante contigo se queda grabado en mi corazón y me hace sonreír sin razón.',
+  img: 'imagenes/escena1.jpg',
+  buttons:[{text:'Calma', action: next},{text:'Alegría', action: next}]
+},
+{
+  title: 'Un pequeño recuerdo 💭',
+  text: 'Hay personas que llegan y hacen que todo se sienta mejor, y tú eres exactamente así en mi vida. Cada risa, cada gesto, cada mirada… me llena de felicidad.',
+  img: 'imagenes/escena2.jpg',
+  buttons:[{text:'Seguir leyendo', action: next}]
+},
+{
+  title: 'Una elección 💘',
+  text: 'Si hoy pudieras elegir un plan perfecto, ¿cuál sería? Me encantaría compartir cada momento contigo, ya sea algo tranquilo o algo especial y romántico.',
+  img: 'imagenes/escena3.jpg',
+  buttons:[{text:'Algo tranquilo juntos', action: next},{text:'Algo especial y romántico', action: next}]
+},
+{
+  title: 'Pregunta final ❤️',
+  text: 'Ali… ¿te gustaría compartir San Valentín conmigo? Me haría muy feliz que aceptaras.',
+  img: 'imagenes/escena4.jpg',
+  buttons:[{text:'💖 Sí, acepto', action:()=>{rain(); next();}},{text:'🐾 Claro que sí', action:()=>{rain(); next();}}]
+},
 
-const scenes=[
+// NUEVAS ESCENAS INTERACTIVAS
 {
- title:"Ali 💖",
- text:"Quería regalarte algo hecho con calma, pensando en ti. Algo que no se lea rápido, sino que se sienta.",
- img:"https://via.placeholder.com/400x220?text=Ali",
- buttons:[{text:"Continuar 💌",next:1}]
+  title: "Un mundo solo nuestro 🌌",
+  text: "Cierro los ojos y me imagino un mundo donde solo existimos tú y yo. Cada estrella brilla un poquito más cuando pienso en ti, y cada viento suave me recuerda tu voz. Me encantaría poder detener el tiempo y quedarnos así para siempre, compartiendo cada pequeño instante con calma y amor.",
+  img: "imagenes/personaje1.png",
+  buttons:[
+    {text:"Quiero quedarme ahí contigo 💖", action:()=>{next(); rain();}},
+    {text:"Ese mundo suena perfecto ✨", action:()=>{next(); rain();}}
+  ]
 },
 {
- title:"Pensarte ✨",
- text:"A veces pienso en ti sin darme cuenta. En tu voz, tu risa, y en cómo haces que todo se sienta más bonito.",
- img:"https://via.placeholder.com/400x220?text=Recuerdos",
- buttons:[{text:"Seguir leyendo 🤍",next:2}]
+  title: "Nuestros sueños 💭",
+  text: "A veces me pongo a pensar en los sueños que podríamos cumplir juntos. Viajes inesperados, tardes de risas infinitas, secretos que solo nosotros entendemos. Cada plan que imagino me hace sonreír, porque sé que contigo todo se siente posible y cada momento se vuelve mágico.",
+  img: "imagenes/personaje2.png",
+  buttons:[
+    {text:"Yo también quiero soñar contigo 🌟", action:()=>{next(); rain();}},
+    {text:"Quiero hacerlos realidad juntos 💞", action:()=>{next(); rain();}}
+  ]
 },
 {
- title:"Lo nuestro 💭",
- text:"No ha sido perfecto, pero ha sido real. Y eso es lo que más quiero cuidar: lo que construimos juntos.",
- img:"https://via.placeholder.com/400x220?text=Nosotros",
- buttons:[{text:"Me gusta leer esto 💞",next:3}]
+  title: "Pequeños detalles ✨",
+  text: "Son esos pequeños detalles tuyos los que hacen que te ame más cada día: tu risa que me llena de felicidad, tus gestos que me hacen sentir cuidado, y la manera en que haces que todo sea más bonito. Si pudiera, guardaría cada uno de esos momentos en un frasco de recuerdos eternos.",
+  img: "imagenes/personaje3.png",
+  buttons:[
+    {text:"Me encanta que notes los detalles 💌", action:()=>{next(); rain();}},
+    {text:"Yo también quiero cuidar cada momento contigo 💖", action:()=>{next(); rain();}}
+  ]
 },
+
+// ESCENA FINAL
 {
- title:"Un deseo 💫",
- text:"Me gustaría seguir compartiendo la vida contigo. Momentos simples, abrazos largos y amor sincero.",
- img:"https://via.placeholder.com/400x220?text=Abrazo",
- buttons:[{text:"A mí también me gustaría 💖",next:4}]
-},
-{
- title:"Ali… ❤️",
- text:"Con todo lo que siento, quería preguntarte algo desde el corazón… ¿te gustaría compartir este San Valentín conmigo?",
- img:"https://via.placeholder.com/400x220?text=San+Valentin",
- buttons:[{text:"Sí, quiero 💘",next:5}]
-},
-{final:true}
+  title: '💞',
+  text: 'Gracias por llegar hasta aquí. Este recuerdo ya es nuestro.',
+  img: 'imagenes/ali.jpg',
+  buttons: [],
+  final:true
+}
 ];
 
-function startMusic(){
- if(!musicStarted){
-   music.volume=0.4;
-   music.play();
-   musicStarted=true;
- }
+function startGame(){
+  document.getElementById('music').play();
+  next();
 }
 
-function raiseVolume(){
- let v=music.volume;
- const up=setInterval(()=>{
-   if(v>=1) clearInterval(up);
-   else {v+=0.05; music.volume=v;}
- },200);
+function next(){
+  const scene = scenes[step];
+  if(!scene) return;
+  const title = document.getElementById('title');
+  const text = document.getElementById('text');
+  const image = document.getElementById('image');
+  const buttonsDiv = document.getElementById('buttons');
+
+  title.innerText = scene.title;
+  text.innerText = scene.text;
+  image.src = scene.img;
+
+  buttonsDiv.innerHTML='';
+
+  if(scene.final){
+    setTimeout(showFinal,800);
+    return;
+  }
+
+  scene.buttons.forEach(b=>{
+    const btn=document.createElement('button');
+    btn.innerText=b.text;
+    btn.onclick=b.action;
+    buttonsDiv.appendChild(btn);
+  });
+
+  step++;
 }
 
-function rain(){
- const items=["💖","🌷"];
- for(let i=0;i<160;i++){
-  const f=document.createElement("div");
-  f.className="fall";
-  f.innerText=items[Math.floor(Math.random()*items.length)];
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(3+Math.random()*3)+"s";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),6000);
- }
+function showFinal(){
+  const card=document.getElementById('game');
+  card.innerHTML=`<div id="finalText">Te amo, Ali 💖</div>
+  <div class="gallery">
+    <img src="imagenes/recuerdo1.jpg">
+    <img src="imagenes/recuerdo2.jpg">
+    <img src="imagenes/recuerdo3.jpg">
+    <img src="imagenes/recuerdo4.jpg">
+  </div>`;
+
+  document.getElementById('music').volume=1;
+  rain();
+  const photos = document.querySelectorAll('.gallery img');
+  photos.forEach((img,i)=>{
+    setTimeout(()=>img.style.opacity=1, i*1000);
+  });
 }
-
-function revealGallery(){
- const imgs=document.querySelectorAll(".gallery img");
- imgs.forEach((img,i)=>{
-   setTimeout(()=>img.classList.add("show"), i*800);
- });
-}
-
-function render(){
- const s=scenes[step];
- const b=document.getElementById("buttons");
- b.innerHTML="";
-
- if(s.final){
-   rain();
-   raiseVolume();
-   document.getElementById("image").style.display="none";
-   document.getElementById("title").innerText="";
-   document.getElementById("text").innerHTML=
-   `<div class="final-love">Te amo, Ali 💖</div>
-    <div class="gallery">
-      <img src="imagenes/recuerdo1.jpg">
-      <img src="https://via.placeholder.com/200?text=Foto+2">
-      <img src="https://via.placeholder.com/200?text=Foto+3">
-      <img src="https://via.placeholder.com/200?text=Foto+4">
-    </div>`;
-   setTimeout(revealGallery,1200);
-   return;
- }
-
- document.getElementById("image").style.display="block";
- document.getElementById("image").src=s.img;
- document.getElementById("title").innerText=s.title;
- document.getElementById("text").innerText=s.text;
-
- s.buttons.forEach(btn=>{
-  const el=document.createElement("button");
-  el.innerText=btn.text;
-  el.onclick=()=>{
-    startMusic();
-    step=btn.next;
-    document.getElementById("progress").style.width=
-      (step/(scenes.length-1))*100+"%";
-    render();
-  };
-  b.appendChild(el);
- });
-}
-
-render();
 </script>
 </body>
 </html>
+
+
 
 
