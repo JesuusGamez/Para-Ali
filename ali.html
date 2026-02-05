@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ali 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:radial-gradient(circle at bottom,#1a001a,#000);
+  color:#fff;
+  overflow:hidden;
+}
+
+/* ESTRELLAS */
+.stars{position:fixed;width:100%;height:100%;z-index:0;}
+.star{
+  position:absolute;width:2px;height:2px;
+  background:white;border-radius:50%;
+  animation:twinkle 4s infinite;
+}
+@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
+
+/* CARD */
+.card{
+  position:relative;z-index:2;
+  background:rgba(15,15,15,.92);
+  border-radius:22px;
+  padding:22px;
+  max-width:420px;
+  margin:6vh auto;
+  box-shadow:0 25px 50px rgba(0,0,0,.7);
+  animation:fade .6s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1}}
+
+img{
+  width:100%;max-height:220px;
+  object-fit:cover;border-radius:16px;margin-bottom:15px;
+}
+
+h1{color:#ff4d8d}
+p{line-height:1.65}
+
+button{
+  width:100%;padding:12px;border-radius:14px;
+  border:none;font-size:16px;
+  background:#ff4d8d;color:#fff;
+  font-weight:bold;margin-top:8px;
+}
+
+/* PROGRESO */
+.progress{height:6px;background:#333;border-radius:10px;margin-bottom:15px}
+.progress-bar{height:100%;background:#ff4d8d;width:0%;transition:.4s}
+
+/* FLORES + CORAZONES */
+.fall{
+  position:fixed;bottom:-20px;
+  font-size:30px;
+  animation:float 5s linear forwards;
+  pointer-events:none;z-index:1;
+}
+@keyframes float{
+  from{transform:translateY(0) scale(1);opacity:1}
+  to{transform:translateY(-120vh) scale(1.6);opacity:0}
+}
+
+/* FINAL */
+.final-love{
+  font-family:'Pacifico',cursive;
+  font-size:60px;
+  color:#ff7fb0;
+  text-align:center;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+
+/* GALERIA */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:20px;
+}
+.gallery img{
+  height:120px;
+  opacity:0;
+  transform:scale(.9);
+  transition:all .8s ease;
+}
+.gallery img.show{
+  opacity:1;
+  transform:scale(1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<audio id="music" loop>
+  <source src="IRIS.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <div class="progress"><div class="progress-bar" id="progress"></div></div>
+  <img id="image">
+  <h1 id="title"></h1>
+  <p id="text"></p>
+  <div id="buttons"></div>
+</div>
+
+<script>
+// ESTRELLAS
+for(let i=0;i<140;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDelay=Math.random()*4+"s";
+  document.getElementById("stars").appendChild(s);
+}
+
+let step=0, musicStarted=false;
+const music=document.getElementById("music");
+
+const scenes=[
+{
+ title:"Ali 💖",
+ text:"Quería regalarte algo hecho con calma, pensando en ti. Algo que no se lea rápido, sino que se sienta.",
+ img:"https://via.placeholder.com/400x220?text=Ali",
+ buttons:[{text:"Continuar 💌",next:1}]
+},
+{
+ title:"Pensarte ✨",
+ text:"A veces pienso en ti sin darme cuenta. En tu voz, tu risa, y en cómo haces que todo se sienta más bonito.",
+ img:"https://via.placeholder.com/400x220?text=Recuerdos",
+ buttons:[{text:"Seguir leyendo 🤍",next:2}]
+},
+{
+ title:"Lo nuestro 💭",
+ text:"No ha sido perfecto, pero ha sido real. Y eso es lo que más quiero cuidar: lo que construimos juntos.",
+ img:"https://via.placeholder.com/400x220?text=Nosotros",
+ buttons:[{text:"Me gusta leer esto 💞",next:3}]
+},
+{
+ title:"Un deseo 💫",
+ text:"Me gustaría seguir compartiendo la vida contigo. Momentos simples, abrazos largos y amor sincero.",
+ img:"https://via.placeholder.com/400x220?text=Abrazo",
+ buttons:[{text:"A mí también me gustaría 💖",next:4}]
+},
+{
+ title:"Ali… ❤️",
+ text:"Con todo lo que siento, quería preguntarte algo desde el corazón… ¿te gustaría compartir este San Valentín conmigo?",
+ img:"https://via.placeholder.com/400x220?text=San+Valentin",
+ buttons:[{text:"Sí, quiero 💘",next:5}]
+},
+{final:true}
+];
+
+function startMusic(){
+ if(!musicStarted){
+   music.volume=0.4;
+   music.play();
+   musicStarted=true;
+ }
+}
+
+function raiseVolume(){
+ let v=music.volume;
+ const up=setInterval(()=>{
+   if(v>=1) clearInterval(up);
+   else {v+=0.05; music.volume=v;}
+ },200);
+}
+
+function rain(){
+ const items=["💖","🌷"];
+ for(let i=0;i<160;i++){
+  const f=document.createElement("div");
+  f.className="fall";
+  f.innerText=items[Math.floor(Math.random()*items.length)];
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),6000);
+ }
+}
+
+function revealGallery(){
+ const imgs=document.querySelectorAll(".gallery img");
+ imgs.forEach((img,i)=>{
+   setTimeout(()=>img.classList.add("show"), i*800);
+ });
+}
+
+function render(){
+ const s=scenes[step];
+ const b=document.getElementById("buttons");
+ b.innerHTML="";
+
+ if(s.final){
+   rain();
+   raiseVolume();
+   document.getElementById("image").style.display="none";
+   document.getElementById("title").innerText="";
+   document.getElementById("text").innerHTML=
+   `<div class="final-love">Te amo, Ali 💖</div>
+    <div class="gallery">
+      <img src="imagenes/recuerdo1.jpg">
+      <img src="https://via.placeholder.com/200?text=Foto+2">
+      <img src="https://via.placeholder.com/200?text=Foto+3">
+      <img src="https://via.placeholder.com/200?text=Foto+4">
+    </div>`;
+   setTimeout(revealGallery,1200);
+   return;
+ }
+
+ document.getElementById("image").style.display="block";
+ document.getElementById("image").src=s.img;
+ document.getElementById("title").innerText=s.title;
+ document.getElementById("text").innerText=s.text;
+
+ s.buttons.forEach(btn=>{
+  const el=document.createElement("button");
+  el.innerText=btn.text;
+  el.onclick=()=>{
+    startMusic();
+    step=btn.next;
+    document.getElementById("progress").style.width=
+      (step/(scenes.length-1))*100+"%";
+    render();
+  };
+  b.appendChild(el);
+ });
+}
+
+render();
+</script>
+</body>
+</html>
+
+
