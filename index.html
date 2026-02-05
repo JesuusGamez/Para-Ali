@@ -340,15 +340,18 @@ function heartbeat(){
 
 // LLUVIA FINAL (MÁS TIEMPO)
 function rain(){
- ["💖","🌷"].forEach(sym=>{
-  for(let i=0;i<160;i++){
+ const symbols=["💖","🌷"];
+ symbols.forEach(sym=>{
+  for(let i=0;i<120;i++){ // menos elementos para que no queden tan pegados
    const f=document.createElement("div");
    f.className="fall";
    f.innerText=sym;
-   f.style.left=Math.random()*100+"vw";
-   f.style.animationDuration=(20+Math.random()*8)+"s";
+   f.style.left=Math.random()*90+"vw"; // para que no queden pegados a los bordes
+   f.style.fontSize=(30+Math.random()*25)+"px"; // tamaño variado
+   f.style.animationDuration=(25+Math.random()*15)+"s"; // más lento
+   f.style.animationDelay=(Math.random()*10)+"s"; // que no caigan todos al mismo tiempo
    document.body.appendChild(f);
-   setTimeout(()=>f.remove(),28000);
+   setTimeout(()=>f.remove(),40000); // que duren más en pantalla
   }
  });
 }
@@ -422,3 +425,4 @@ render();
 </script>
 </body>
 </html>
+
