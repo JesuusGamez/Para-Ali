@@ -57,13 +57,14 @@ body.stage-final{background:radial-gradient(circle at bottom,#3a003f,#120028)}
   max-width:440px;
   box-shadow:0 25px 50px rgba(0,0,0,.7);
   text-align:center;
+  transition:transform 0.2s ease;
 }
-.card.heartbeat{animation:heartbeat 1s infinite;}
+.card.heartbeat{animation:heartbeat 1.2s infinite;}
 @keyframes heartbeat{
   0%{transform:scale(1)}
   20%{transform:scale(1.03)}
   40%{transform:scale(1)}
-  60%{transform:scale(1.05)}
+  60%{transform:scale(1.03)}
   100%{transform:scale(1)}
 }
 
@@ -160,15 +161,26 @@ const music=document.getElementById("music");
 const card=document.getElementById("card");
 
 const scenes=[
-{t:"Ali 💖",x:"Quería regalarte algo hecho con calma. Un espacio donde cada palabra tuviera intención y pudieras leer sin prisa, como se sienten las cosas que de verdad importan.",i:"https://via.placeholder.com/400x220",b:"Continuar 💌"},
-{t:"Pensarte ✨",x:"Apareces en mis pensamientos más veces de las que imaginas. En canciones, en silencios, en pequeños detalles que se vuelven especiales solo porque estás en ellos.",i:"https://via.placeholder.com/400x220",b:"Seguir 🤍"},
-{t:"Lo cotidiano 🌙",x:"Me gusta pensarnos en lo simple. En compartir miradas, risas, mensajes sin motivo. En sentir que lo normal se vuelve bonito cuando lo vivimos juntos.",i:"https://via.placeholder.com/400x220",b:"Continúa ✨"},
-{t:"Lo difícil 🤍",x:"También hubo momentos difíciles. Dudas, silencios, aprendizajes. Y aun así elegí quedarme, porque lo nuestro vale el esfuerzo sincero.",i:"https://via.placeholder.com/400x220",b:"Sigo aquí 💞"},
-{t:"Lo que siento 💫",x:"Lo que siento por ti es calma, cuidado y ganas de verte bien. Es elegirte sin prisa, con el corazón abierto.",i:"https://via.placeholder.com/400x220",b:"Continúa 💖"},
-{t:"Mi promesa 🌷",x:"No prometo perfección, pero sí honestidad. No prometo que todo sea fácil, pero sí caminarlo juntos.",i:"https://via.placeholder.com/400x220",b:"Sigue 💗"},
-{t:"Un deseo 💫",x:"Me gustaría seguir compartiendo la vida contigo. Momentos simples, abrazos largos y amor sincero. Este deseo late dentro de mí cada día que pienso en ti.",i:"https://via.placeholder.com/400x220",b:"Lo quiero 💞"},
-{t:"Ali… 💓",x:"Mi corazón late más rápido al preguntarte esto… ¿Te gustaría compartir este San Valentín conmigo?",i:"https://via.placeholder.com/400x220",b:"Sí, quiero 💘",final:true}
+{t:"Ali 💖",x:"Quería regalarte algo hecho con calma. Un espacio donde cada palabra tuviera intención y pudieras leer sin prisa, como se sienten las cosas que de verdad importan.",i:"imagenes/ali.jpg",b:"Continuar 💌"},
+{t:"Pensarte ✨",x:"Apareces en mis pensamientos más veces de las que imaginas. En canciones, en silencios, en pequeños detalles que se vuelven especiales solo porque estás en ellos.",i:"imagenes/pensarte.jpg",b:"Seguir 🤍"},
+{t:"Lo cotidiano 🌙",x:"Me gusta pensarnos en lo simple. En compartir miradas, risas, mensajes sin motivo. En sentir que lo normal se vuelve bonito cuando lo vivimos juntos.",i:"imagenes/cotidiano.jpg",b:"Continúa ✨"},
+{t:"Lo difícil 🤍",x:"También hubo momentos difíciles. Dudas, silencios, aprendizajes. Y aun así elegí quedarme, porque lo nuestro vale el esfuerzo sincero.",i:"imagenes/dificil.jpg",b:"Sigo aquí 💞"},
+{t:"Lo que siento 💫",x:"Lo que siento por ti es calma, cuidado y ganas de verte bien. Es elegirte sin prisa, con el corazón abierto.",i:"imagenes/siento.jpg",b:"Continúa 💖"},
+{t:"Mi promesa 🌷",x:"No prometo perfección, pero sí honestidad. No prometo que todo sea fácil, pero sí caminarlo juntos.",i:"imagenes/promesa.jpg",b:"Sigue 💗"},
+{t:"Un deseo 💫",x:"Me gustaría seguir compartiendo la vida contigo. Momentos simples, abrazos largos y amor sincero. Este deseo late dentro de mí cada día que pienso en ti.",i:"imagenes/deseo.jpg",b:"Lo quiero 💞"},
+{t:"Ali… 💓",x:"Mi corazón late más rápido al preguntarte esto… ¿Te gustaría compartir este San Valentín conmigo?",i:"imagenes/final.jpg",b:"Sí, quiero 💘",final:true}
 ];
+
+// LATIDOS Y VIBRACIÓN
+let heartbeatInterval;
+function startHeartbeat(){
+  card.classList.add("heartbeat");
+  heartbeatInterval=setInterval(()=>{
+    if(navigator.vibrate){
+      navigator.vibrate(200); // vibración breve con cada latido
+    }
+  },1200); // latido lento cada 1.2s
+}
 
 // RENDER
 function render(){
@@ -184,10 +196,13 @@ function render(){
    music.volume=.3;
    music.play();
    started=true;
+   startHeartbeat(); // iniciamos latidos y vibraciones
   }
   if(s.final){
    rain();
-   card.innerHTML=`<div class="final-love">Te amo, Ali 💖</div>
+   card.innerHTML=`
+   <div class="final-love">Te amo, Ali 💖</div>
+   <img src="imagenes/medio.jpg" style="width:80%; max-width:300px; border-radius:18px; margin:20px auto; display:block;">
    <div class="secret" id="secret">Gracias por existir en mi vida. Siempre voy a elegirte.</div>`;
    card.onclick=()=>document.getElementById("secret").style.display="block";
    return;
@@ -221,6 +236,8 @@ function rain(){
 
 </body>
 </html>
+
+
 
 
 
